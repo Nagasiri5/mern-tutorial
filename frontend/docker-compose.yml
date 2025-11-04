@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  backend:
+    build: ./backend
+    container_name: tm_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+  frontend:
+    build: ./frontend
+    container_name: tm_frontend
+    ports:
+      - "3000:80"
+    environment:
+      - REACT_APP_API_URL=http://<VM_PUBLIC_IP>:5000   # use this when deploying to VM
